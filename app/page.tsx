@@ -1,5 +1,6 @@
-import { Button, Hero } from "./components";
-import { Card } from "./components/Card/Card";
+"use client"
+
+import { Button, Hero, Card } from "./components";
 
 export default function Home() {
   return (

@@ -26,7 +26,9 @@ export default function Login() {
         <main className="lg:mx-16 xl:mx-48 h-screen flex items-center justify-center">
             <article className="w-96">
                 <header>
-                    <h2 className="text-5xl font-bold tracking-tight text-center text-white mb-4">Fazer Login</h2>
+                    <h2 className="text-5xl font-bold tracking-tight text-center text-white mb-4">
+                        { mode === "login" ? "Fazer Login" : "Cadastrar" }
+                    </h2>
                 </header>
                 <section>
                     <div>
