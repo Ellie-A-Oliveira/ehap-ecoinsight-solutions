@@ -39,8 +39,17 @@ export default function Solucao() {
     return (
         <AuthGuard>
             <main className="lg:mx-16 xl:mx-48 mt-20 mb-20">
-                <Table data={dadosProducaoPlastico} title="Produção Anual de Plastico" loadingData={loadingProducaoPlastico} />
-                <Table classList="mt-8" data={dadosPoluicaoCidade} title="Poluição por Cidade" loadingData={loadingPoluicaoCidade} />
+                <Table
+                    omitProps={["entidadeId"]}
+                    data={dadosProducaoPlastico}
+                    title="Produção Anual de Plastico"
+                    loadingData={loadingProducaoPlastico} />
+                <Table
+                    classList="mt-8"
+                    omitProps={["entidadeId"]}
+                    data={dadosPoluicaoCidade}
+                    title="Poluição por Cidade"
+                    loadingData={loadingPoluicaoCidade} />
             </main>
         </AuthGuard>
     )

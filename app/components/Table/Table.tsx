@@ -5,9 +5,10 @@ interface Table {
     title: string
     classList?: string
     loadingData?: boolean
+    omitProps?: string[]
 }
 
-export const Table = ({ data, title, classList, loadingData }: Table) => {
+export const Table = ({ data, title, classList, loadingData, omitProps }: Table) => {
     return <article className={`${classList}`}>
         <header>
             <h2 className="text-5xl font-bold tracking-tight text-white">{title}</h2>
@@ -23,6 +24,7 @@ export const Table = ({ data, title, classList, loadingData }: Table) => {
                     <thead className="block md:table-header-group bg-primary">
                         <tr className="border border-gray md:border-none block md:table-row">
                             {Object.keys(data[0]).map((key, index) =>
+                                !omitProps?.includes(key) &&
                                 <th className="bg-gray-200 p-2 text-gray-600 text-left block md:table-cell" key={index}>{camelCaseToHumanReadable(key)}</th>
                             )}
                         </tr>
@@ -31,6 +33,7 @@ export const Table = ({ data, title, classList, loadingData }: Table) => {
                         {data.map((row, index) => (
                             <tr className="bg-secondary border border-gray md:border-none block md:table-row" key={index}>
                                 {Object.values(row).map((value, index) =>
+                                    !omitProps?.includes(Object.keys(row)[index]) &&
                                     <td className="p-2 text-gray-600 text-left block md:table-cell" key={index}>{value}</td>
                                 )}
                             </tr>
