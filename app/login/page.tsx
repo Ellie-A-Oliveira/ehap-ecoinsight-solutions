@@ -1,10 +1,14 @@
 "use client"
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, FormInput } from "../components";
+import { useRouter } from "next/navigation";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Login() {
     const [mode, setMode] = useState<"login" | "register">("login");
+    const context = useContext(UserContext);
+    const router = useRouter();
 
     //TODO - implementar login
 
@@ -17,6 +21,9 @@ export default function Login() {
 
         if (mode === "login") {
             console.log("Login");
+            // TODO - implementar login
+            context.setUserToken("token");
+            router.push("/dashboard");
         } else {
             console.log("Register");
         }

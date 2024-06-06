@@ -9,7 +9,7 @@ interface Table {
 }
 
 export const Table = ({ data, title, classList, loadingData, omitProps }: Table) => {
-    return <article className={`${classList}`}>
+    return <article className={classList}>
         <header>
             <h2 className="text-5xl font-bold tracking-tight text-white">{title}</h2>
         </header>
