@@ -5,6 +5,7 @@ import { AuthGuard, Table } from "../components"
 import { ProducaoPlastico } from "../interfaces/ProducaoPlastico.interface"
 import { PoluicaoCidade } from "../interfaces/PoluicaoCidade.interface"
 import { producaoPlasticoDataMock } from "../mocks/ProducaoPlastico.mock"
+import { poluicaoCidadeDataMock } from "../mocks/PoluicaoCidade.mock"
 
 export default function Solucao() {
     const [dadosProducaoPlastico, setDadosProducaoPlastico] = useState<ProducaoPlastico[]>([])
@@ -26,7 +27,9 @@ export default function Solucao() {
 
     useEffect(() => {
         // TODO - consumir a API e popular as tabelas
-        setDadosPoluicaoCidade([])
+        setDadosPoluicaoCidade(
+            poluicaoCidadeDataMock
+        )
 
         setTimeout(() => {
             setLoadingPoluicaoCidade(false)
@@ -35,7 +38,7 @@ export default function Solucao() {
 
     return (
         <AuthGuard>
-            <main className="lg:mx-16 xl:mx-48 mt-20">
+            <main className="lg:mx-16 xl:mx-48 mt-20 mb-20">
                 <Table data={dadosProducaoPlastico} title="Produção Anual de Plastico" loadingData={loadingProducaoPlastico} />
                 <Table classList="mt-8" data={dadosPoluicaoCidade} title="Poluição por Cidade" loadingData={loadingPoluicaoCidade} />
             </main>
