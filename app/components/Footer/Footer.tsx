@@ -1,10 +1,10 @@
-import { FooterStyled } from "./Footer.style"
+import styles from "./Footer.module.css"
 
 export const Footer = () => {
     return (
-        <FooterStyled className="bg-secondary py-4 px-8">
+        <footer className="bg-secondary py-4 px-8">
             <p className="text-3xl font-bold tracking-tight text-white my-auto">
-                <span className="logo mr-1">EHAP</span>
+                <span className={`mr-1 ${styles.logo}`}>EHAP</span>
                 <span className="text-gray text-sm">by EcoInsight Solutions</span>
             </p>
 
@@ -17,6 +17,6 @@ export const Footer = () => {
             <p className="text-gray text-sm mt-2">EcoInsight Solutions</p>
             <p className="text-gray text-sm">Comprometidos com um futuro sustentável através da inovação tecnológica. </p>
             <p className="text-gray text-sm mt-4">© 2024 EcoInsight Solutions. Todos os direitos reservados.</p>
-        </FooterStyled>
+        </footer>
     )
 }

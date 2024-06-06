@@ -1,0 +1,5 @@
+.logo {
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(75deg, #3195CA, #296938);
+}
