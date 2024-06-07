@@ -11,26 +11,25 @@ export default function Login() {
     const context = useContext(UserContext);
     const router = useRouter();
 
-    const [usuario, setUsuario] = useState<string>("");
+    const [nomeUsuario, setNomeUsuario] = useState<string>("");
     const [nome, setNome] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
     const [mensagem, setMensagem] = useState<string>("");
 
     const handleLogin = async () => {
         try {
-            console.log(usuario);
-            console.log(senha);
             const response = await fetch("http://localhost:8085/usuario/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    usuario,
+                    usuario: nomeUsuario,
                     senha
                 })
 
             });
+            
             if (response.status === 200) {
                 setMensagem('Login realizado com sucesso!');
                 context.setUserToken("token");
@@ -55,16 +54,16 @@ export default function Login() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    nomeUsuario,
                     nome,
-                    usuario,
-                    senha
+                    senha,
                 }),
             })
-            if (response.status === 200) {
+            if (response.status === 201) {
                 setMensagem('Cadastro realizado com sucesso!');
                 context.setUserToken("token");
-                mode === "login"
-            }if (response.status === 401) {
+                router.push("/dashboard");
+            }if (response.status === 400) {
                 setMensagem('Cadastro inválido. Tente novamente.');
             }
         } catch (error) {
@@ -86,6 +85,7 @@ export default function Login() {
             } else {
                 handleRegister();
                 console.log("Register");
+                
             }
         };
 
@@ -108,7 +108,7 @@ export default function Login() {
                                         </div>
                                     }
                                     <div className="mb-4">
-                                        <FormInput name="username" label="Usuário" type="username" placeholder="Insira seu usuário" required={true} onInput={(event) => setUsuario(event.target.value)} />
+                                        <FormInput name="username" label="Usuário" type="username" placeholder="Insira seu usuário" required={true} onInput={(event) => setNomeUsuario(event.target.value)} />
                                         
                                             
                                     </div>
