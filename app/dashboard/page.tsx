@@ -14,27 +14,40 @@ export default function Solucao() {
     const [loadingProducaoPlastico, setLoadingProducaoPlastico] = useState(true)
     const [loadingPoluicaoCidade, setLoadingPoluicaoCidade] = useState(true)
 
-    useEffect(() => {
-        // TODO - consumir a API e popular as tabelas
+    async function getProducaoPlastico() {
+
+        const response = await fetch("http://localhost:8085/producao-plastico", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
         setDadosProducaoPlastico(
-            producaoPlasticoDataMock
+            await response.json()
         )
+        setLoadingProducaoPlastico(false)
 
-        setTimeout(() => {
-            setLoadingProducaoPlastico(false)
-        }, 3000)
-    }, [])
-
+    }
     useEffect(() => {
         // TODO - consumir a API e popular as tabelas
-        setDadosPoluicaoCidade(
-            poluicaoCidadeDataMock
-        )
-
-        setTimeout(() => {
-            setLoadingPoluicaoCidade(false)
-        }, 3000)
+        getProducaoPlastico()
+        getPoluicaoCidade()
     }, [])
+
+    async function getPoluicaoCidade() {
+
+        const response = await fetch("http://localhost:8085/poluicao-cidade", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        setDadosPoluicaoCidade(
+            await response.json()
+        )
+        setLoadingPoluicaoCidade(false)
+
+    }
 
     return (
         <AuthGuard>
