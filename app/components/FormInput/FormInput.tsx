@@ -4,9 +4,10 @@ interface FormInputProps {
     type: string
     placeholder: string
     required?: boolean
+    onInput?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const FormInput = ({ name, label, type, placeholder, required }: FormInputProps) => {
+export const FormInput = ({ name, label, type, placeholder, required, onInput }: FormInputProps) => {
     return (
         <>
         <label
@@ -21,6 +22,7 @@ export const FormInput = ({ name, label, type, placeholder, required }: FormInpu
             type={type}
             placeholder={placeholder}
             required={required}
+            onInput={onInput}
         />
         </>
     )
