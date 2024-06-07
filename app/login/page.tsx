@@ -12,6 +12,7 @@ export default function Login() {
     const router = useRouter();
 
     const [usuario, setUsuario] = useState<string>("");
+    const [nome, setNome] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
     const [mensagem, setMensagem] = useState<string>("");
 
@@ -46,6 +47,30 @@ export default function Login() {
     //TODO - implementar login
 
 
+    const handleRegister = async () => {
+        try {
+            const response = await fetch("http://localhost:8085/usuario/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nome,
+                    usuario,
+                    senha
+                }),
+            })
+            if (response.status === 200) {
+                setMensagem('Cadastro realizado com sucesso!');
+                context.setUserToken("token");
+                mode === "login"
+            }if (response.status === 401) {
+                setMensagem('Cadastro inválido. Tente novamente.');
+            }
+        } catch (error) {
+            console.error("Erro ao tentar registrar:", error);
+        }
+    };
 
     const toggleMode = () => {
             setMode(mode === "login" ? "register" : "login");
@@ -58,8 +83,8 @@ export default function Login() {
                 console.log("Login");
                 // TODO - implementar login
                 handleLogin();
-
             } else {
+                handleRegister();
                 console.log("Register");
             }
         };
@@ -79,7 +104,7 @@ export default function Login() {
                                     {
                                         mode === "register" &&
                                         <div className="mb-4">
-                                            <FormInput name="name" label="Nome Completo" type="name" placeholder="Insira seu nome" required={true} />
+                                            <FormInput name="name" label="Nome Completo" type="name" placeholder="Insira seu nome" required={true} onInput={(event) => setNome(event.target.value)} />
                                         </div>
                                     }
                                     <div className="mb-4">
